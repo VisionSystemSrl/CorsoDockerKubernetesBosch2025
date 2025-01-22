@@ -133,6 +133,41 @@ Una volta completato il caricamento, la tua immagine sarà disponibile su Docker
 
 Accedi al sito web di Docker Hub e controlla i tuoi repository per assicurarti che l'immagine sia elencata.
 
+### 5. Pubblica l'immagine su un repository privato
+#### 5.1 Azure Container Registry
+Se hai un account Azure, puoi utilizzare Azure Container Registry per archiviare le tue immagini Docker in un repository privato.
+Login:
+```bash
+az acr login --name your_registry_name 
+```
+
+Tag:
+```bash
+docker tag generative-ai-app:1.0 your_registry_name.azurecr.io/generative-ai-app:1.0
+```
+
+Push:
+```bash
+docker push your_registry_name.azurecr.io/generative-ai-app:1.0
+```
+
+#### 5.2 GitHub Container Registry
+Se hai un account GitHub, puoi utilizzare GitHub Container Registry per archiviare le tue immagini Docker in un repository privato.
+Login:
+```bash
+echo "<YOUR_PERSONAL_ACCESS_TOKEN>" | docker login ghcr.io -u <YOUR_GITHUB_USERNAME> --password-stdin
+```
+
+Tag:
+```bash
+docker tag generative-ai-app:1.0 ghcr.io/your_github_username/generative-ai-app:1.0
+```
+
+Push:
+```bash
+docker push ghcr.io/your_github_username/generative-ai-app:1.0
+```
+
 ## Note Aggiuntive
 
 - Se devi ricostruire l'immagine dopo aver apportato modifiche al codice o al Dockerfile, ri-esegui il comando `docker build`.
