@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama
+  namespace: ollama
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama
+  template:
+    metadata:
+      labels:
+        app: ollama
+    spec:
+      containers:
+      - name: ollama
+        image: fabiovisionsystem/ollama-phi:latest 
+        ports:
+        - containerPort: 11434
+        resources:
+          limits:
+           nvidia.com/gpu: 1
+      
+
+     
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ollama-service
+  namespace: ollama
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 11434
+    targetPort: 11434
+    protocol: TCP
+  selector:
+    app: ollama
