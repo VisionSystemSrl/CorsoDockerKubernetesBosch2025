@@ -10,5 +10,6 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: ""
   azureDisk:
+    kind: Managed
     diskName: myAzureDisk
-    diskURI: # insert here the Azure Disk ID
+    diskURI: 
